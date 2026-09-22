@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zeus Bot - Gestão Profissional para EA Sports FC</title>
+    <title>Zeus Bot - Gestão Profissional para EA Sports FC 26 & FC27</title>
     <style>
         :root {
             --bg-dark: #0b0f17;
@@ -25,7 +25,7 @@
         .logo { display: flex; align-items: center; gap: 14px; font-weight: 800; font-size: 1.35rem; color: #fff; cursor: pointer; letter-spacing: 0.5px; }
         .logo-img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--gold); object-fit: cover; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
         
-        nav ul { display: flex; gap: 25px; list-style: none; align-items: center; }
+        nav ul { display: flex; gap: 20px; list-style: none; align-items: center; }
         nav a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: color 0.2s; cursor: pointer; }
         nav a:hover, nav a.active { color: var(--gold-light); text-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
         
@@ -60,6 +60,17 @@
         .card h3 { font-size: 1.35rem; color: #fff; margin-bottom: 12px; font-weight: 700; }
         .card p { font-size: 1rem; color: var(--text-muted); line-height: 1.5; }
 
+        /* Pricing Grid */
+        .grid-pricing { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+        .pricing-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+        .pricing-card.featured { border-color: var(--gold); box-shadow: 0 0 25px rgba(212, 175, 55, 0.2); }
+        .pricing-card h3 { font-size: 1.5rem; color: #fff; margin-bottom: 10px; font-weight: 800; }
+        .price { font-size: 2.5rem; font-weight: 900; color: var(--gold-light); margin-bottom: 20px; }
+        .price span { font-size: 1rem; font-weight: 400; color: var(--text-muted); }
+        .pricing-features { list-style: none; margin-bottom: 30px; }
+        .pricing-features li { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .pricing-features li::before { content: '✓'; color: var(--gold); font-weight: bold; }
+
         /* Legal / Documentation Pages */
         .legal-container { max-width: 900px; margin: 0 auto; }
         .legal-nav { display: flex; gap: 15px; justify-content: center; margin-bottom: 40px; flex-wrap: wrap; }
@@ -93,7 +104,8 @@
                 <ul>
                     <li><a onclick="switchPage('home')" id="nav-home" class="active">Início</a></li>
                     <li><a onclick="switchPage('features')" id="nav-features">Funcionalidades</a></li>
-                    <li><a onclick="switchPage('terms')" id="nav-terms">Termos de Serviço</a></li>
+                    <li><a onclick="switchPage('pricing')" id="nav-pricing">Preços</a></li>
+                    <li><a onclick="switchPage('terms')" id="nav-terms">Termos</a></li>
                     <li><a onclick="switchPage('privacy')" id="nav-privacy">Privacidade</a></li>
                     <li><a onclick="switchPage('refunds')" id="nav-refunds">Reembolsos</a></li>
                 </ul>
@@ -114,9 +126,9 @@
         <!-- HOME PAGE -->
         <div id="page-home" class="page active">
             <section class="hero">
-                <div class="badge" id="badge-hero">⚡ Poder Absoluto para Equipas Profissionais de EA Sports FC 26 & FC27</div>
+                <div class="badge" id="badge-hero">⚡ Ecossistema Completo para Equipas Profissionais de EA Sports FC 26 & FC27</div>
                 <h1 id="hero-title">Eleva a tua equipa de Esports ao pináculo com o <span>Zeus Bot</span></h1>
-                <p id="hero-subtitle">Gestão mitológica de estatísticas por OCR, agendamento automatizado de treinos, sincronização divina de cargos e relatórios de partidas para o teu clube de Pro Clubs e Ultimate Team.</p>
+                <p id="hero-subtitle">Gestão profissional de plantéis, perfis EA FC, estatísticas por OCR, agendamento de treinos, táticas customizadas e votações em tempo real para Pro Clubs e Ultimate Team.</p>
                 <div class="hero-buttons">
                     <button onclick="alert('Link de convite oficial do Zeus Bot a ser configurado.')" class="btn-gold" style="padding: 16px 32px; font-size: 1.05rem;">
                         <span id="txt-invite-hero">Convidar Zeus Bot</span>
@@ -127,19 +139,19 @@
 
             <div class="grid-3">
                 <div class="card" onclick="switchPage('features')">
-                    <div class="card-icon">⚡</div>
-                    <h3 id="feat1-title">Leitura OCR de Partidas</h3>
-                    <p id="feat1-desc">Extração automática de estatísticas, golos e pontuações individuais através de capturas de ecrã do FC26 e FC27 com precisão divina.</p>
+                    <div class="card-icon">👥</div>
+                    <h3 id="feat1-title">Gestão de Plantel & Perfis</h3>
+                    <p id="feat1-desc">Registo de jogadores com Discord ID, Nome EA, Virtual Pro e sincronização automática de alcunhas oficiais no Discord.</p>
                 </div>
                 <div class="card" onclick="switchPage('features')">
-                    <div class="card-icon">🛡️</div>
-                    <h3 id="feat2-title">Gestão de Treinos</h3>
-                    <p id="feat2-desc">Agendamento automatizado de sessões de treino, convocatórias estratégicas e controlo total de presenças do plantel.</p>
+                    <div class="card-icon">⚽</div>
+                    <h3 id="feat2-title">Táticas & Escalador Interativo</h3>
+                    <p id="feat2-desc">Gestão de alinhamentos com formações padrão e táticas personalizadas criadas dinamicamente pelas equipas.</p>
                 </div>
                 <div class="card" onclick="switchPage('features')">
-                    <div class="card-icon">👑</div>
-                    <h3 id="feat3-title">Base de Dados Segura</h3>
-                    <p id="feat3-desc">Registo histórico lendário de desempenho de jogadores e configurações personalizadas por servidor hospedadas em MySQL.</p>
+                    <div class="card-icon">🚀</div>
+                    <h3 id="feat3-title">Importação OCR & Estatísticas</h3>
+                    <p id="feat3-desc">Leitura automática de screenshots de fim de partida para histórico público de desempenho individual e do clube.</p>
                 </div>
             </div>
         </div>
@@ -147,25 +159,95 @@
         <!-- FEATURES PAGE -->
         <div id="page-features" class="page">
             <div style="text-align: center; margin-bottom: 50px;">
-                <h2 id="feat-page-title" style="color: #fff; font-size: 2.5rem; margin-bottom: 15px; font-weight: 800;">Arsenal Tecnológico para o teu Clube</h2>
-                <p id="feat-page-subtitle" style="color: var(--text-muted); font-size: 1.15rem;">Forjado especificamente para responder às exigências máximas de managers e atletas de esports profissionais.</p>
+                <h2 id="feat-page-title" style="color: #fff; font-size: 2.5rem; margin-bottom: 15px; font-weight: 800;">Módulos Avançados do Ecossistema</h2>
+                <p id="feat-page-subtitle" style="color: var(--text-muted); font-size: 1.15rem;">Desenvolvido com backend em Python, base de dados MySQL e JSON flexível para máxima performance.</p>
             </div>
 
             <div class="grid-3">
                 <div class="card">
-                    <div class="card-icon">⚡</div>
-                    <h3 id="f1-t">Sincronização de Nicknames</h3>
-                    <p id="f1-d">Mantém o império organizado com atribuição automática de cargos e padronização absoluta de nicks no Discord baseada no plantel ativo.</p>
+                    <div class="card-icon">👥</div>
+                    <h3 id="f1-t">Plantel & Sincronização</h3>
+                    <p id="f1-d">Associa Discord ID, Nome EA, Virtual Pro, Posição e Número da Camisola com formato oficial [Número] Nome EA [Posição].</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📅</div>
+                    <h3 id="f2-t">Calendário & Convocatórias</h3>
+                    <p id="f2-d">Visualização da agenda semanal de treinos e jogos oficiais com publicação automática de convocatórias em canais dedicados.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⚽</div>
+                    <h3 id="f3-t">Táticas Customizadas</h3>
+                    <p id="f3-d">Formações padrão (3-5-2, 4-3-3, 4-2-3-1) e formações personalizadas geridas dinamicamente pelas equipas.</p>
                 </div>
                 <div class="card">
                     <div class="card-icon">📊</div>
-                    <h3 id="f2-t">Rankings e Estatísticas</h3>
-                    <p id="f2-d">Gera tabelas lendárias de melhores marcadores, assistências, pontuações médias e relatórios táticos detalhados após cada jornada oficial.</p>
+                    <h3 id="f4-t">Eventos & Votações</h3>
+                    <p id="f4-d">Criação de eventos autónomos com inscrições via botões interativos e sondagens em tempo real (Disponível no Plano Premium).</p>
                 </div>
                 <div class="card">
-                    <div class="card-icon">🏆</div>
-                    <h3 id="f3-t">Pronto para FC27</h3>
-                    <p id="f3-d">Atualizações contínuas e divinas para dominar as novas mecânicas, interfaces e formatos de competições oficiais do EA Sports FC.</p>
+                    <div class="card-icon">🚀</div>
+                    <h3 id="f5-t">OCR & Histórico Pro</h3>
+                    <p id="f5-d">Leitura automática de placares e desempenho individual via OCR online com estatísticas acumuladas de golos e assistências.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⚙️</div>
+                    <h3 id="f6-t">Pronto para FC26 & FC27</h3>
+                    <p id="f6-d">Compatibilidade total com as exigências técnicas e competitivas das novas temporadas de EA Sports FC.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRICING PAGE -->
+        <div id="page-pricing" class="page">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h2 id="pricing-page-title" style="color: #fff; font-size: 2.5rem; margin-bottom: 15px; font-weight: 800;">Planos e Subscrições</h2>
+                <p id="pricing-page-subtitle" style="color: var(--text-muted); font-size: 1.15rem;">Escolhe o plano ideal para potenciar o desempenho do teu clube profissional.</p>
+            </div>
+
+            <div class="grid-pricing">
+                <!-- Free Plan -->
+                <div class="pricing-card">
+                    <div>
+                        <h3 id="p1-name">Plano Free</h3>
+                        <div class="price">0€ <span>/ mês</span></div>
+                        <ul class="pricing-features">
+                            <li id="p1-f1">Gestão base de Plantel e Perfis</li>
+                            <li id="p1-f2">Histórico de resultados básico</li>
+                            <li id="p1-f3">Alinhamentos e táticas manuais</li>
+                        </ul>
+                    </div>
+                    <button onclick="alert('Plano Gratuito selecionado.')" class="btn-secondary" style="width: 100%; text-align: center;" id="p1-btn">Começar Grátis</button>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="pricing-card featured">
+                    <div>
+                        <div class="badge" style="margin-bottom: 15px;" id="p2-badge">Mais Popular</div>
+                        <h3 id="p2-name">Plano Premium</h3>
+                        <div class="price">9.99€ <span>/ mês</span></div>
+                        <ul class="pricing-features">
+                            <li id="p2-f1">Tudo do Plano Free</li>
+                            <li id="p2-f2">Gestão avançada de Eventos e Torneios</li>
+                            <li id="p2-f3">Inscrições via botões interativos</li>
+                            <li id="p2-f4">Votações dinâmicas e automações</li>
+                        </ul>
+                    </div>
+                    <button onclick="alert('Redirecionando para checkout Stripe - Plano Premium.')" class="btn-gold" style="width: 100%; text-align: center; justify-content: center;" id="p2-btn">Assinar Premium</button>
+                </div>
+
+                <!-- PRO Plan -->
+                <div class="pricing-card">
+                    <div>
+                        <h3 id="p3-name">Plano PRO</h3>
+                        <div class="price">19.99€ <span>/ mês</span></div>
+                        <ul class="pricing-features">
+                            <li id="p3-f1">Tudo dos planos anteriores</li>
+                            <li id="p3-f2">Importação automática via OCR (Screenshots)</li>
+                            <li id="p3-f3">Estatísticas avançadas detalhadas</li>
+                            <li id="p3-f4">Prioridade máxima e suporte dedicado</li>
+                        </ul>
+                    </div>
+                    <button onclick="alert('Redirecionando para checkout Stripe - Plano PRO.')" class="btn-secondary" style="width: 100%; text-align: center;" id="p3-btn">Assinar PRO</button>
                 </div>
             </div>
         </div>
@@ -187,26 +269,26 @@
                     <li><strong id="t-lbl-name">Nome:</strong> [NOME COMPLETO]</li>
                     <li><strong id="t-lbl-addr">Morada:</strong> [MORADA]</li>
                     <li><strong id="t-lbl-email">E-mail:</strong> [EMAIL DE CONTACTO]</li>
-                    <li><strong id="t-lbl-bot">Nome do bot/serviço:</strong> Zeus Bot</li>
+                    <li><strong id="t-lbl-bot">Nome do bot/serviço:</strong> Zeus Bot (Zeus FC26)</li>
                 </ul>
                 <p id="t-p-op">O serviço é operado a partir de Portugal.</p>
 
                 <h3 id="t-s2">2. Aceitação dos Termos</h3>
                 <p id="t-p2">Ao adquirir, utilizar ou aceder ao Zeus Bot, o utilizador declara que leu, compreendeu e aceita os presentes Termos de Serviço. Caso não concorde com estes termos, não deverá adquirir ou utilizar o serviço.</p>
 
-                <h3 id="t-s3">3. Descrição do Serviço</h3>
-                <p id="t-p3">O Zeus Bot é um bot destinado à plataforma Discord, disponibilizado mediante uma subscrição mensal para gestão de equipas de EA Sports FC.</p>
+                <h3 id="t-s3">3. Descrição do Serviço e Planos</h3>
+                <p id="t-p3">O Zeus Bot é um ecossistema destinado à plataforma Discord, disponibilizado através de planos Free, Premium e PRO para gestão profissional de equipas de EA Sports FC.</p>
                 <ul>
-                    <li id="t-li1">Comandos automatizados e leitura OCR;</li>
-                    <li id="t-li2">Ferramentas de administração, moderação e treinos;</li>
-                    <li id="t-li3">Sistemas de logs e gestão de servidores.</li>
+                    <li id="t-li1">Gestão de plantéis, perfis e táticas;</li>
+                    <li id="t-li2">Eventos, votações e automações de treino;</li>
+                    <li id="t-li3">Importação OCR de estatísticas e painéis de controlo.</li>
                 </ul>
 
-                <h3 id="t-s4">4. Subscrição e Pagamentos</h3>
-                <p id="t-p4">O acesso ao serviço é disponibilizado através de uma subscrição mensal cujo preço aplicável será o apresentado no momento da compra. A subscrição poderá renovar-se automaticamente, salvo cancelamento efetuado antes da próxima cobrança.</p>
+                <h3 id="t-s4">4. Subscrição e Pagamentos (Stripe)</h3>
+                <p id="t-p4">O acesso aos planos pagos é processado de forma segura via Stripe através de subscrições mensais. A subscrição renova-se automaticamente, salvo cancelamento efetuado atempadamente antes da próxima cobrança.</p>
 
                 <h3 id="t-s5">5. Cancelamento e Reembolsos</h3>
-                <p id="t-p5">O utilizador pode solicitar o cancelamento da sua subscrição a qualquer momento. Não são efetuados reembolsos voluntários relativamente a períodos de subscrição já iniciados, exceto quando exigido por lei ou acordado pelo prestador.</p>
+                <p id="t-p5">O utilizador pode solicitar o cancelamento da sua subscrição a qualquer momento. Não são efetuados reembolsos voluntários relativamente a períodos de subscrição já iniciados, exceto quando exigido por lei.</p>
 
                 <h3 id="t-s6">6. Utilização Aceitável e Propriedade Intelectual</h3>
                 <p id="t-p6">É estritamente proibido utilizar o bot para atividades ilegais, spam ou violação das regras da Discord. Todos os direitos relativos ao código, marca e design pertencem ao respetivo titular.</p>
@@ -236,10 +318,10 @@
                 </ul>
 
                 <h3 id="p-s2">2. Dados que Recolhemos</h3>
-                <p id="p-p2">Dependendo da utilização do serviço, podemos recolher IDs de utilizador e servidor Discord, identificadores de canais, informações técnicas, logs de utilização, registos de comandos e dados de subscrição.</p>
+                <p id="p-p2">Recolhemos IDs de utilizador e servidor Discord, nomes EA, dados de Virtual Pro, logs técnicos, registos de comandos, imagens enviadas para OCR e dados de subscrição processados via Stripe.</p>
 
                 <h3 id="p-s3">3. Finalidades do Tratamento</h3>
-                <p id="p-p3">Os dados são utilizados para disponibilizar as funcionalidades do bot, identificar utilizadores, executar comandos, manter logs, diagnosticar erros, prevenir abusos e cumprir obrigações legais.</p>
+                <p id="p-p3">Os dados são utilizados para disponibilizar as funcionalidades do bot, gerir plantéis, processar estatísticas OCR, manter sistemas MySQL/JSON, prevenir abusos e cumprir obrigações legais.</p>
 
                 <h3 id="p-s4">4. Direitos dos Utilizadores e CNPD</h3>
                 <p id="p-p4">O utilizador tem direito de acesso, retificação, apagamento, limitação, oposição e portabilidade. Em Portugal, a autoridade de controlo competente é a Comissão Nacional de Proteção de Dados (CNPD).</p>
@@ -260,8 +342,8 @@
                 <h2 id="r-h1">POLÍTICA DE REEMBOLSOS</h2>
                 <span class="update-date" id="r-date">Última atualização: 8 de setembro de 2026</span>
                 
-                <h3 id="r-s1">1. Subscrições Mensais</h3>
-                <p id="r-p1">O Zeus Bot funciona através de subscrições mensais que dão acesso ao serviço durante o período contratado.</p>
+                <h3 id="r-s1">1. Subscrições Mensais (Stripe)</h3>
+                <p id="r-p1">Os planos pagos do Zeus Bot (Premium e PRO) funcionam através de subscrições mensais processadas com segurança via Stripe.</p>
 
                 <h3 id="r-s2">2. Política Geral</h3>
                 <p id="r-p2">Não oferecemos reembolsos voluntários por períodos de subscrição já iniciados, alteração de opinião, não utilização do bot ou remoção voluntária do servidor.</p>
@@ -296,52 +378,69 @@
             pt: {
                 navHome: "Início",
                 navFeatures: "Funcionalidades",
-                navTerms: "Termos de Serviço",
+                navPricing: "Preços",
+                navTerms: "Termos",
                 navPrivacy: "Privacidade",
                 navRefunds: "Reembolsos",
                 invite: "Adicionar ao Discord",
-                badgeHero: "⚡ Poder Absoluto para Equipas Profissionais de EA Sports FC 26 & FC27",
+                badgeHero: "⚡ Ecossistema Completo para Equipas Profissionais de EA Sports FC 26 & FC27",
                 heroTitle: "Eleva a tua equipa de Esports ao pináculo com o <span>Zeus Bot</span>",
-                heroSubtitle: "Gestão mitológica de estatísticas por OCR, agendamento automatizado de treinos, sincronização divina de cargos e relatórios de partidas para o teu clube de Pro Clubs e Ultimate Team.",
+                heroSubtitle: "Gestão profissional de plantéis, perfis EA FC, estatísticas por OCR, agendamento de treinos, táticas customizadas e votações em tempo real para Pro Clubs e Ultimate Team.",
                 btnExplore: "Ver Funcionalidades",
-                feat1Title: "Leitura OCR de Partidas",
-                feat1Desc: "Extração automática de estatísticas, golos e pontuações individuais através de capturas de ecrã do FC26 e FC27 com precisão divina.",
-                feat2Title: "Gestão de Treinos",
-                feat2Desc: "Agendamento automatizado de sessões de treino, convocatórias estratégicas e controlo total de presenças do plantel.",
-                feat3Title: "Base de Dados Segura",
-                feat3Desc: "Registo histórico lendário de desempenho de jogadores e configurações personalizadas por servidor hospedadas em MySQL.",
-                featPageTitle: "Arsenal Tecnológico para o teu Clube",
-                featPageSubtitle: "Forjado especificamente para responder às exigências máximas de managers e atletas de esports profissionais.",
-                f1T: "Sincronização de Nicknames",
-                f1D: "Mantém o império organizado com atribuição automática de cargos e padronização absoluta de nicks no Discord baseada no plantel ativo.",
-                f2T: "Rankings e Estatísticas",
-                f2D: "Gera tabelas lendárias de melhores marcadores, assistências, pontuações médias e relatórios táticos detalhados após cada jornada oficial.",
-                f3T: "Pronto para FC27",
-                f3D: "Atualizações contínuas e divinas para dominar as novas mecânicas, interfaces e formatos de competições oficiais do EA Sports FC.",
+                feat1Title: "Gestão de Plantel & Perfis",
+                feat1Desc: "Registo de jogadores com Discord ID, Nome EA, Virtual Pro e sincronização automática de alcunhas oficiais no Discord.",
+                feat2Title: "Táticas & Escalador Interativo",
+                feat2Desc: "Gestão de alinhamentos com formações padrão e táticas personalizadas criadas dinamicamente pelas equipas.",
+                feat3Title: "Importação OCR & Estatísticas",
+                feat3Desc: "Leitura automática de screenshots de fim de partida para histórico público de desempenho individual e do clube.",
+                featPageTitle: "Módulos Avançados do Ecossistema",
+                featPageSubtitle: "Desenvolvido com backend em Python, base de dados MySQL e JSON flexível para máxima performance.",
+                f1T: "Plantel & Sincronização",
+                f1D: "Associa Discord ID, Nome EA, Virtual Pro, Posição e Número da Camisola com formato oficial [Número] Nome EA [Posição].",
+                f2T: "Calendário & Convocatórias",
+                f2D: "Visualização da agenda semanal de treinos e jogos oficiais com publicação automática de convocatórias em canais dedicados.",
+                f3T: "Táticas Customizadas",
+                f3D: "Formações padrão (3-5-2, 4-3-3, 4-2-3-1) e formações personalizadas geridas dinamicamente pelas equipas.",
+                f4T: "Eventos & Votações",
+                f4D: "Criação de eventos autónomos com inscrições via botões interativos e sondagens em tempo real (Disponível no Plano Premium).",
+                f5T: "OCR & Histórico Pro",
+                f5D: "Leitura automática de placares e desempenho individual via OCR online com estatísticas acumuladas de golos e assistências.",
+                f6T: "Pronto para FC26 & FC27",
+                f6D: "Compatibilidade total com as exigências técnicas e competitivas das novas temporadas de EA Sports FC.",
+                
+                pricingPageTitle: "Planos e Subscrições",
+                pricingPageSubtitle: "Escolhe o plano ideal para potenciar o desempenho do teu clube profissional.",
+                p1Name: "Plano Free", p1Btn: "Começar Grátis",
+                p1F1: "Gestão base de Plantel e Perfis", p1F2: "Histórico de resultados básico", p1F3: "Alinhamentos e táticas manuais",
+                p2Badge: "Mais Popular", p2Name: "Plano Premium", p2Btn: "Assinar Premium",
+                p2F1: "Tudo do Plano Free", p2F2: "Gestão avançada de Eventos e Torneios", p2F3: "Inscrições via botões interativos", p2F4: "Votações dinâmicas e automações",
+                p3Name: "Plano PRO", p3Btn: "Assinar PRO",
+                p3F1: "Tudo dos planos anteriores", p3F2: "Importação automática via OCR (Screenshots)", p3F3: "Estatísticas avançadas detalhadas", p3F4: "Prioridade máxima e suporte dedicado",
+
                 footer: "&copy; 2026 <span>Zeus Bot</span>. Todos os direitos reservados. Não afiliado à EA Sports ou à Discord Inc.",
                 
                 // Terms PT
                 tH1: "TERMOS DE SERVIÇO", tDate: "Última atualização: 8 de setembro de 2026",
                 tS1: "1. Identificação", tLblName: "Nome:", tLblAddr: "Morada:", tLblEmail: "E-mail:", tLblBot: "Nome do bot/serviço:", tPOp: "O serviço é operado a partir de Portugal.",
                 tS2: "2. Aceitação dos Termos", tP2: "Ao adquirir, utilizar ou aceder ao Zeus Bot, o utilizador declara que leu, compreendeu e aceita os presentes Termos de Serviço. Caso não concorde com estes termos, não deverá adquirir ou utilizar o serviço.",
-                tS3: "3. Descrição do Serviço", tP3: "O Zeus Bot é um bot destinado à plataforma Discord, disponibilizado mediante uma subscrição mensal para gestão de equipas de EA Sports FC.",
-                tLi1: "Comandos automatizados e leitura OCR;", tLi2: "Ferramentas de administração, moderação e treinos;", tLi3: "Sistemas de logs e gestão de servidores.",
-                tS4: "4. Subscrição e Pagamentos", tP4: "O acesso ao serviço é disponibilizado através de uma subscrição mensal cujo preço aplicável será o apresentado no momento da compra. A subscrição poderá renovar-se automaticamente, salvo cancelamento efetuado antes da próxima cobrança.",
-                tS5: "5. Cancelamento e Reembolsos", tP5: "O utilizador pode solicitar o cancelamento da sua subscrição a qualquer momento. Não são efetuados reembolsos voluntários relativamente a períodos de subscrição já iniciados, exceto quando exigido por lei ou acordado pelo prestador.",
+                tS3: "3. Descrição do Serviço e Planos", tP3: "O Zeus Bot é um ecossistema destinado à plataforma Discord, disponibilizado através de planos Free, Premium e PRO para gestão profissional de equipas de EA Sports FC.",
+                tLi1: "Gestão de plantéis, perfis e táticas;", tLi2: "Eventos, votações e automações de treino;", tLi3: "Importação OCR de estatísticas e painéis de controlo.",
+                tS4: "4. Subscrição e Pagamentos (Stripe)", tP4: "O acesso aos planos pagos é processado de forma segura via Stripe através de subscrições mensais. A subscrição renova-se automaticamente, salvo cancelamento efetuado atempadamente antes da próxima cobrança.",
+                tS5: "5. Cancelamento e Reembolsos", tP5: "O utilizador pode solicitar o cancelamento da sua subscrição a qualquer momento. Não são efetuados reembolsos voluntários relativamente a períodos de subscrição já iniciados, exceto quando exigido por lei.",
                 tS6: "6. Utilização Aceitável e Propriedade Intelectual", tP6: "É estritamente proibido utilizar o bot para atividades ilegais, spam ou violação das regras da Discord. Todos os direitos relativos ao código, marca e design pertencem ao respetivo titular.",
                 tS7: "7. Contacto",
 
                 // Privacy PT
                 pH1: "POLÍTICA DE PRIVACIDADE", pDate: "Última atualização: 8 de setembro de 2026",
                 pS1: "1. Responsável pelo Tratamento", pLblName: "Nome:", pLblAddr: "Morada:", pLblEmail: "E-mail:",
-                pS2: "2. Dados que Recolhemos", pP2: "Dependendo da utilização do serviço, podemos recolher IDs de utilizador e servidor Discord, identificadores de canais, informações técnicas, logs de utilização, registos de comandos e dados de subscrição.",
-                pS3: "3. Finalidades do Tratamento", pP3: "Os dados são utilizados para disponibilizar as funcionalidades do bot, identificar utilizadores, executar comandos, manter logs, diagnosticar erros, prevenir abusos e cumprir obrigações legais.",
+                pS2: "2. Dados que Recolhemos", pP2: "Recolhemos IDs de utilizador e servidor Discord, nomes EA, dados de Virtual Pro, logs técnicos, registos de comandos, imagens enviadas para OCR e dados de subscrição processados via Stripe.",
+                pS3: "3. Finalidades do Tratamento", pP3: "Os dados são utilizados para disponibilizar as funcionalidades do bot, gerir plantéis, processar estatísticas OCR, manter sistemas MySQL/JSON, prevenir abusos e cumprir obrigações legais.",
                 pS4: "4. Direitos dos Utilizadores e CNPD", pP4: "O utilizador tem direito de acesso, retificação, apagamento, limitação, oposição e portabilidade. Em Portugal, a autoridade de controlo competente é a Comissão Nacional de Proteção de Dados (CNPD).",
                 pS5: "5. Contacto",
 
                 // Refunds PT
                 rH1: "POLÍTICA DE REEMBOLSOS", rDate: "Última atualização: 8 de setembro de 2026",
-                rS1: "1. Subscrições Mensais", rP1: "O Zeus Bot funciona através de subscrições mensais que dão acesso ao serviço durante o período contratado.",
+                rS1: "1. Subscrições Mensais (Stripe)", rP1: "Os planos pagos do Zeus Bot (Premium e PRO) funcionam através de subscrições mensais processadas com segurança via Stripe.",
                 rS2: "2. Política Geral", rP2: "Não oferecemos reembolsos voluntários por períodos de subscrição já iniciados, alteração de opinião, não utilização do bot ou remoção voluntária do servidor.",
                 rS3: "3. Direitos Legais e Livre Resolução", rP3: "A presente política não elimina nem limita quaisquer direitos de reembolso ou resolução obrigatórios por lei (como o direito de livre resolução na legislação portuguesa quando aplicável).",
                 rS4: "4. Falhas e Contacto", rP4: "Em caso de falha significativa e comprovada imputável ao prestador ou cobranças indevidas, o utilizador deverá contactar-nos através do e-mail abaixo."
@@ -349,37 +448,54 @@
             en: {
                 navHome: "Home",
                 navFeatures: "Features",
-                navTerms: "Terms of Service",
+                navPricing: "Pricing",
+                navTerms: "Terms",
                 navPrivacy: "Privacy",
                 navRefunds: "Refunds",
                 invite: "Add to Discord",
-                badgeHero: "⚡ Absolute Power for Professional EA Sports FC 26 & FC27 Teams",
+                badgeHero: "⚡ Complete Ecosystem for Professional EA Sports FC 26 & FC27 Teams",
                 heroTitle: "Elevate your Esports team to the pinnacle with <span>Zeus Bot</span>",
-                heroSubtitle: "Mythological OCR stats management, automated training schedules, divine role synchronization, and match reporting for your Pro Clubs and Ultimate Team club.",
+                heroSubtitle: "Professional roster management, EA FC profiles, OCR stats, training schedules, custom tactics, and real-time voting for Pro Clubs and Ultimate Team.",
                 btnExplore: "Explore Features",
-                feat1Title: "Match OCR Parsing",
-                feat1Desc: "Automatic extraction of player stats, goals, and individual ratings directly from FC26 & FC27 screenshots with divine precision.",
-                feat2Title: "Training Management",
-                feat2Desc: "Automated scheduling of training sessions, strategic squad call-ups, and complete attendance tracking for your roster.",
-                feat3Title: "Secure Database",
-                feat3Desc: "Legendary historical performance tracking for players and custom multi-server settings hosted on MySQL.",
-                featPageTitle: "Technological Arsenal for Your Club",
-                featPageSubtitle: "Forged specifically to meet the rigorous demands of professional esports managers and athletes.",
-                f1T: "Nickname & Role Sync",
-                f1D: "Keep the empire organized with automatic role assignment and absolute nickname standardization on Discord based on the active roster.",
-                f2T: "Rankings & Statistics",
-                f2D: "Generate legendary top scorer tables, assists leaderboards, average ratings, and detailed match reports after every official matchday.",
-                f3T: "Ready for FC27",
-                f3D: "Continuous and divine updates to master new mechanics, interfaces, and official EA Sports FC tournament formats.",
+                feat1Title: "Roster Management & Profiles",
+                feat1Desc: "Player registration with Discord ID, EA Name, Virtual Pro, and automatic Discord nickname synchronization.",
+                feat2Title: "Tactics & Interactive Lineup",
+                feat2Desc: "Alignment management with standard formations and custom tactics created dynamically by teams.",
+                feat3Title: "OCR Import & Statistics",
+                feat3Desc: "Automatic parsing of post-match screenshots for public individual and club performance history.",
+                featPageTitle: "Advanced Ecosystem Modules",
+                featPageSubtitle: "Powered by Python backend, MySQL database, and flexible JSON for maximum performance.",
+                f1T: "Roster & Synchronization",
+                f1D: "Link Discord ID, EA Name, Virtual Pro, Position, and Jersey Number with official format [Number] EA Name [Position].",
+                f2T: "Calendar & Call-ups",
+                f2D: "Weekly training and official match schedule view with automated call-up announcements in dedicated channels.",
+                f3T: "Custom Tactics",
+                f3D: "Standard formations (3-5-2, 4-3-3, 4-2-3-1) and custom formations dynamically managed by teams.",
+                f4T: "Events & Voting",
+                f4D: "Autonomous event creation with interactive button sign-ups and real-time polls (Available in Premium Plan).",
+                f5T: "OCR & Pro History",
+                f5D: "Automatic scoreboard and individual performance parsing via online OCR with accumulated goals and assists.",
+                f6T: "Ready for FC26 & FC27",
+                f6D: "Full compatibility with technical and competitive demands of new EA Sports FC seasons.",
+                
+                pricingPageTitle: "Plans & Subscriptions",
+                pricingPageSubtitle: "Choose the ideal plan to boost your professional club's performance.",
+                p1Name: "Free Plan", p1Btn: "Start Free",
+                p1F1: "Basic roster and profile management", p1F2: "Basic match history", p1F3: "Manual alignments and tactics",
+                p2Badge: "Most Popular", p2Name: "Premium Plan", p2Btn: "Subscribe Premium",
+                p2F1: "Everything in Free Plan", p2F2: "Advanced Events and Tournaments management", p2F3: "Sign-ups via interactive buttons", p2F4: "Dynamic voting and automation",
+                p3Name: "PRO Plan", p3Btn: "Subscribe PRO",
+                p3F1: "Everything in previous plans", p3F2: "Automatic OCR import (Screenshots)", p3F3: "Detailed advanced statistics", p3F4: "Top priority and dedicated support",
+
                 footer: "&copy; 2026 <span>Zeus Bot</span>. All rights reserved. Not affiliated with EA Sports or Discord Inc.",
 
                 // Terms EN
                 tH1: "TERMS OF SERVICE", tDate: "Last update: September 8, 2026",
                 tS1: "1. Identification", tLblName: "Name:", tLblAddr: "Address:", tLblEmail: "E-mail:", tLblBot: "Bot/service name:", tPOp: "The service is operated from Portugal.",
                 tS2: "2. Acceptance of Terms", tP2: "By purchasing, using, or accessing Zeus Bot, the user declares that they have read, understood, and accept these Terms of Service. If you disagree, do not use the service.",
-                tS3: "3. Service Description", tP3: "Zeus Bot is a Discord bot provided via monthly subscription for EA Sports FC team management.",
-                tLi1: "Automated commands and OCR reading;", tLi2: "Administration, moderation, and training tools;", tLi3: "Log systems and server management.",
-                tS4: "4. Subscription & Payments", tP4: "Access is granted via monthly subscription at the price presented at purchase. Subscriptions renew automatically unless canceled prior to the next billing cycle.",
+                tS3: "3. Service Description & Plans", tP3: "Zeus Bot is a Discord ecosystem provided through Free, Premium, and PRO plans for professional EA Sports FC team management.",
+                tLi1: "Roster, profile, and tactics management;", tLi2: "Events, voting, and training automation;", tLi3: "OCR stats import and control panels.",
+                tS4: "4. Subscription & Payments (Stripe)", tP4: "Access to paid plans is securely processed via Stripe through monthly subscriptions. Subscriptions renew automatically unless canceled prior to billing.",
                 tS5: "5. Cancellation & Refunds", tP5: "Users may request cancellation at any time. Voluntary refunds are not offered for subscription periods already started, except as required by law.",
                 tS6: "6. Acceptable Use & Intellectual Property", tP6: "Using the bot for illegal activities, spam, or violating Discord rules is strictly prohibited. All code, brand, and design rights belong to their respective owner.",
                 tS7: "7. Contact",
@@ -387,14 +503,14 @@
                 // Privacy EN
                 pH1: "PRIVACY POLICY", pDate: "Last update: September 8, 2026",
                 pS1: "1. Data Controller", pLblName: "Name:", pLblAddr: "Address:", pLblEmail: "E-mail:",
-                pS2: "2. Data We Collect", pP2: "Depending on usage, we may collect Discord user and server IDs, channel identifiers, technical info, usage logs, command records, and subscription data.",
-                pS3: "3. Purpose of Processing", pP3: "Data is used to provide bot features, identify users, run commands, maintain logs, diagnose errors, prevent abuse, and comply with legal obligations.",
+                pS2: "2. Data We Collect", pP2: "We collect Discord user and server IDs, EA names, Virtual Pro data, technical logs, command records, images sent for OCR, and Stripe-processed subscription data.",
+                pS3: "3. Purpose of Processing", pP3: "Data is used to provide bot features, manage rosters, process OCR stats, maintain MySQL/JSON systems, prevent abuse, and comply with legal obligations.",
                 pS4: "4. User Rights & CNPD", pP4: "Users have the right of access, rectification, erasure, restriction, objection, and portability. In Portugal, the competent supervisory authority is the National Data Protection Commission (CNPD).",
                 pS5: "5. Contact",
 
                 // Refunds EN
                 rH1: "REFUND POLICY", rDate: "Last update: September 8, 2026",
-                rS1: "1. Monthly Subscriptions", rP1: "Zeus Bot operates via monthly subscriptions providing access during the contracted period.",
+                rS1: "1. Monthly Subscriptions (Stripe)", rP1: "Zeus Bot paid plans (Premium and PRO) operate via monthly subscriptions securely processed through Stripe.",
                 rS2: "2. General Policy", rP2: "We do not offer voluntary refunds for started subscription periods, change of mind, non-use of the bot, or voluntary removal from the server.",
                 rS3: "3. Legal Rights & Withdrawal", rP3: "This policy does not eliminate or limit any statutory refund or resolution rights required by law.",
                 rS4: "4. Failures & Contact", rP4: "In case of significant proven failures attributable to the provider or improper charges, please contact us via the email below."
@@ -408,6 +524,7 @@
             const t = translations[lang];
             document.getElementById('nav-home').innerText = t.navHome;
             document.getElementById('nav-features').innerText = t.navFeatures;
+            document.getElementById('nav-pricing').innerText = t.navPricing;
             document.getElementById('nav-terms').innerText = t.navTerms;
             document.getElementById('nav-privacy').innerText = t.navPrivacy;
             document.getElementById('nav-refunds').innerText = t.navRefunds;
@@ -427,12 +544,22 @@
 
             document.getElementById('feat-page-title').innerText = t.featPageTitle;
             document.getElementById('feat-page-subtitle').innerText = t.featPageSubtitle;
-            document.getElementById('f1-t').innerText = t.f1T;
-            document.getElementById('f1-d').innerText = t.f1D;
-            document.getElementById('f2-t').innerText = t.f2T;
-            document.getElementById('f2-d').innerText = t.f2D;
-            document.getElementById('f3-t').innerText = t.f3T;
-            document.getElementById('f3-d').innerText = t.f3D;
+            document.getElementById('f1-t').innerText = t.f1T; document.getElementById('f1-d').innerText = t.f1D;
+            document.getElementById('f2-t').innerText = t.f2T; document.getElementById('f2-d').innerText = t.f2D;
+            document.getElementById('f3-t').innerText = t.f3T; document.getElementById('f3-d').innerText = t.f3D;
+            document.getElementById('f4-t').innerText = t.f4T; document.getElementById('f4-d').innerText = t.f4D;
+            document.getElementById('f5-t').innerText = t.f5T; document.getElementById('f5-d').innerText = t.f5D;
+            document.getElementById('f6-t').innerText = t.f6T; document.getElementById('f6-d').innerText = t.f6D;
+
+            document.getElementById('pricing-page-title').innerText = t.pricingPageTitle;
+            document.getElementById('pricing-page-subtitle').innerText = t.pricingPageSubtitle;
+            document.getElementById('p1-name').innerText = t.p1Name; document.getElementById('p1-btn').innerText = t.p1Btn;
+            document.getElementById('p1-f1').innerText = t.p1F1; document.getElementById('p1-f2').innerText = t.p1F2; document.getElementById('p1-f3').innerText = t.p1F3;
+            document.getElementById('p2-badge').innerText = t.p2Badge; document.getElementById('p2-name').innerText = t.p2Name; document.getElementById('p2-btn').innerText = t.p2Btn;
+            document.getElementById('p2-f1').innerText = t.p2F1; document.getElementById('p2-f2').innerText = t.p2F2; document.getElementById('p2-f3').innerText = t.p2F3; document.getElementById('p2-f4').innerText = t.p2F4;
+            document.getElementById('p3-name').innerText = t.p3Name; document.getElementById('p3-btn').innerText = t.p3Btn;
+            document.getElementById('p3-f1').innerText = t.p3F1; document.getElementById('p3-f2').innerText = t.p3F2; document.getElementById('p3-f3').innerText = t.p3F3; document.getElementById('p3-f4').innerText = t.p3F4;
+
             document.getElementById('footer-text').innerHTML = t.footer;
 
             // Terms
