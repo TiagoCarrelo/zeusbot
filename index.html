@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeus Bot - Gestão Profissional para EA Sports FC</title>
+    <style>
+        :root {
+            --bg-dark: #0b0f17;
+            --bg-card: #131b2c;
+            --bg-card-hover: #1a253f;
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --gold-dark: #aa8c2c;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border: rgba(212, 175, 55, 0.2);
+            --border-hover: rgba(212, 175, 55, 0.6);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; background-image: radial-gradient(circle at 50% 0%, #172554 0%, transparent 50%); background-attachment: fixed; }
+        
+        header { background: rgba(11, 15, 23, 0.95); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; height: 80px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { display: flex; align-items: center; gap: 14px; font-weight: 800; font-size: 1.35rem; color: #fff; cursor: pointer; letter-spacing: 0.5px; }
+        .logo-img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--gold); object-fit: cover; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+        
+        nav ul { display: flex; gap: 25px; list-style: none; align-items: center; }
+        nav a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: color 0.2s; cursor: pointer; }
+        nav a:hover, nav a.active { color: var(--gold-light); text-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
+        
+        .header-actions { display: flex; gap: 15px; align-items: center; }
+        .lang-switch { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; display: flex; overflow: hidden; }
+        .lang-btn { background: transparent; border: none; color: var(--text-muted); padding: 6px 12px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: 0.2s; }
+        .lang-btn.active { background: var(--gold); color: #0b0f17; }
+        
+        .btn-gold { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: #0b0f17; padding: 11px 22px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 10px; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; border: none; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5); }
+
+        main { max-width: 1200px; margin: 0 auto; padding: 60px 20px; min-height: 80vh; }
+        .page { display: none; }
+        .page.active { display: block; }
+
+        .hero { text-align: center; padding: 40px 0 80px 0; }
+        .badge { display: inline-block; background: rgba(212, 175, 55, 0.1); color: var(--gold-light); border: 1px solid var(--border); padding: 8px 20px; border-radius: 50px; font-size: 0.9rem; font-weight: 600; margin-bottom: 25px; box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.1); }
+        .hero h1 { font-size: 3.2rem; font-weight: 900; color: #fff; margin-bottom: 20px; max-width: 950px; margin-left: auto; margin-right: auto; line-height: 1.2; letter-spacing: -0.5px; }
+        .hero h1 span { background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 30px rgba(212, 175, 55, 0.3); }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 750px; margin: 0 auto 35px auto; }
+        .hero-buttons { display: flex; gap: 20px; justify-content: center; align-items: center; }
+        
+        .btn-secondary { background: var(--bg-card); color: #fff; border: 1px solid var(--border); padding: 12px 28px; border-radius: 10px; font-weight: 600; text-decoration: none; transition: 0.2s; cursor: pointer; }
+        .btn-secondary:hover { background: var(--bg-card-hover); border-color: var(--gold); }
+
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; margin-top: 50px; }
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 35px; transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s; cursor: pointer; position: relative; overflow: hidden; }
+        .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0; transition: opacity 0.2s; }
+        .card:hover { transform: translateY(-5px); border-color: var(--gold); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(212, 175, 55, 0.1); }
+        .card:hover::before { opacity: 1; }
+        .card-icon { font-size: 2.2rem; color: var(--gold); margin-bottom: 20px; }
+        .card h3 { font-size: 1.35rem; color: #fff; margin-bottom: 12px; font-weight: 700; }
+        .card p { font-size: 1rem; color: var(--text-muted); line-height: 1.5; }
+
+        /* Legal / Documentation Pages */
+        .legal-container { max-width: 900px; margin: 0 auto; }
+        .legal-nav { display: flex; gap: 15px; justify-content: center; margin-bottom: 40px; flex-wrap: wrap; }
+        .legal-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; }
+        .legal-box h2 { color: var(--gold-light); font-size: 2rem; margin-bottom: 10px; }
+        .legal-box .update-date { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 30px; display: block; }
+        .legal-box h3 { color: #fff; font-size: 1.25rem; margin: 30px 0 12px 0; border-left: 3px solid var(--gold); padding-left: 12px; }
+        .legal-box p, .legal-box li { color: var(--text-muted); font-size: 1rem; margin-bottom: 12px; line-height: 1.7; }
+        .legal-box ul { padding-left: 20px; margin-bottom: 15px; }
+
+        footer { background: #070a10; border-top: 1px solid var(--border); padding: 40px 0; text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 100px; }
+        footer p span { color: var(--gold); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.3rem; }
+            nav ul { display: none; }
+            .hero-buttons { flex-direction: column; width: 100%; }
+            .hero-buttons a, .hero-buttons button { width: 100%; text-align: center; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo" onclick="switchPage('home')">
+                <img src="logozeus.png" alt="Zeus Bot Logo" class="logo-img" onerror="this.style.display='none'">
+                <span>Zeus Bot</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a onclick="switchPage('home')" id="nav-home" class="active">Início</a></li>
+                    <li><a onclick="switchPage('features')" id="nav-features">Funcionalidades</a></li>
+                    <li><a onclick="switchPage('terms')" id="nav-terms">Termos de Serviço</a></li>
+                    <li><a onclick="switchPage('privacy')" id="nav-privacy">Privacidade</a></li>
+                    <li><a onclick="switchPage('refunds')" id="nav-refunds">Reembolsos</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="lang-switch">
+                    <button class="lang-btn active" id="btn-pt" onclick="setLanguage('pt')">PT</button>
+                    <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">EN</button>
+                </div>
+                <button onclick="alert('Link de convite oficial do Zeus Bot a ser configurado.')" class="btn-gold">
+                    <span id="txt-invite">Adicionar ao Discord</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HOME PAGE -->
+        <div id="page-home" class="page active">
+            <section class="hero">
+                <div class="badge" id="badge-hero">⚡ Poder Absoluto para Equipas Profissionais de EA Sports FC 26 & FC27</div>
+                <h1 id="hero-title">Eleva a tua equipa de Esports ao pináculo com o <span>Zeus Bot</span></h1>
+                <p id="hero-subtitle">Gestão mitológica de estatísticas por OCR, agendamento automatizado de treinos, sincronização divina de cargos e relatórios de partidas para o teu clube de Pro Clubs e Ultimate Team.</p>
+                <div class="hero-buttons">
+                    <button onclick="alert('Link de convite oficial do Zeus Bot a ser configurado.')" class="btn-gold" style="padding: 16px 32px; font-size: 1.05rem;">
+                        <span id="txt-invite-hero">Convidar Zeus Bot</span>
+                    </button>
+                    <button onclick="switchPage('features')" class="btn-secondary" id="btn-explore">Ver Funcionalidades</button>
+                </div>
+            </section>
+
+            <div class="grid-3">
+                <div class="card" onclick="switchPage('features')">
+                    <div class="card-icon">⚡</div>
+                    <h3 id="feat1-title">Leitura OCR de Partidas</h3>
+                    <p id="feat1-desc">Extração automática de estatísticas, golos e pontuações individuais através de capturas de ecrã do FC26 e FC27 com precisão divina.</p>
+                </div>
+                <div class="card" onclick="switchPage('features')">
+                    <div class="card-icon">🛡️</div>
+                    <h3 id="feat2-title">Gestão de Treinos</h3>
+                    <p id="feat2-desc">Agendamento automatizado de sessões de treino, convocatórias estratégicas e controlo total de presenças do plantel.</p>
+                </div>
+                <div class="card" onclick="switchPage('features')">
+                    <div class="card-icon">👑</div>
+                    <h3 id="feat3-title">Base de Dados Segura</h3>
+                    <p id="feat3-desc">Registo histórico lendário de desempenho de jogadores e configurações personalizadas por servidor hospedadas em MySQL.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FEATURES PAGE -->
+        <div id="page-features" class="page">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h2 id="feat-page-title" style="color: #fff; font-size: 2.5rem; margin-bottom: 15px; font-weight: 800;">Arsenal Tecnológico para o teu Clube</h2>
+                <p id="feat-page-subtitle" style="color: var(--text-muted); font-size: 1.15rem;">Forjado especificamente para responder às exigências máximas de managers e atletas de esports profissionais.</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon">⚡</div>
+                    <h3 id="f1-t">Sincronização de Nicknames</h3>
+                    <p id="f1-d">Mantém o império organizado com atribuição automática de cargos e padronização absoluta de nicks no Discord baseada no plantel ativo.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <h3 id="f2-t">Rankings e Estatísticas</h3>
+                    <p id="f2-d">Gera tabelas lendárias de melhores marcadores, assistências, pontuações médias e relatórios táticos detalhados após cada jornada oficial.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏆</div>
+                    <h3 id="f3-t">Pronto para FC27</h3>
+                    <p id="f3-d">Atualizações contínuas e divinas para dominar as novas mecânicas, interfaces e formatos de competições oficiais do EA Sports FC.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TERMS OF SERVICE PAGE -->
+        <div id="page-terms" class="page legal-container">
+            <div class="legal-nav">
+                <button onclick="switchPage('terms')" class="btn-secondary" style="border-color: var(--gold);" id="sub-t">Termos de Serviço</button>
+                <button onclick="switchPage('privacy')" class="btn-secondary" id="sub-p">Política de Privacidade</button>
+                <button onclick="switchPage('refunds')" class="btn-secondary" id="sub-r">Política de Reembolsos</button>
+            </div>
+            <div class="legal-box">
+                <h2 id="t-h1">TERMOS DE SERVIÇO</h2>
+                <span class="update-date" id="t-date">Última atualização: 8 de setembro de 2026</span>
+                
+                <h3 id="t-s1">1. Identificação</h3>
+                <p>O presente serviço é disponibilizado por:</p>
+                <ul>
+                    <li><strong id="t-lbl-name">Nome:</strong> [NOME COMPLETO]</li>
+                    <li><strong id="t-lbl-addr">Morada:</strong> [MORADA]</li>
+                    <li><strong id="t-lbl-email">E-mail:</strong> [EMAIL DE CONTACTO]</li>
+                    <li><strong id="t-lbl-bot">Nome do bot/serviço:</strong> Zeus Bot</li>
+                </ul>
+                <p id="t-p-op">O serviço é operado a partir de Portugal.</p>
+
+                <h3 id="t-s2">2. Aceitação dos Termos</h3>
+                <p id="t-p2">Ao adquirir, utilizar ou aceder ao Zeus Bot, o utilizador declara que leu, compreendeu e aceita os presentes Termos de Serviço. Caso não concorde com estes termos, não deverá adquirir ou utilizar o serviço.</p>
+
+                <h3 id="t-s3">3. Descrição do Serviço</h3>
+                <p id="t-p3">O Zeus Bot é um bot destinado à plataforma Discord, disponibilizado mediante uma subscrição mensal para gestão de equipas de EA Sports FC.</p>
+                <ul>
+                    <li id="t-li1">Comandos automatizados e leitura OCR;</li>
+                    <li id="t-li2">Ferramentas de administração, moderação e treinos;</li>
+                    <li id="t-li3">Sistemas de logs e gestão de servidores.</li>
+                </ul>
+
+                <h3 id="t-s4">4. Subscrição e Pagamentos</h3>
+                <p id="t-p4">O acesso ao serviço é disponibilizado através de uma subscrição mensal cujo preço aplicável será o apresentado no momento da compra. A subscrição poderá renovar-se automaticamente, salvo cancelamento efetuado antes da próxima cobrança.</p>
+
+                <h3 id="t-s5">5. Cancelamento e Reembolsos</h3>
+                <p id="t-p5">O utilizador pode solicitar o cancelamento da sua subscrição a qualquer momento. Não são efetuados reembolsos voluntários relativamente a períodos de subscrição já iniciados, exceto quando exigido por lei ou acordado pelo prestador.</p>
+
+                <h3 id="t-s6">6. Utilização Aceitável e Propriedade Intelectual</h3>
+                <p id="t-p6">É estritamente proibido utilizar o bot para atividades ilegais, spam ou violação das regras da Discord. Todos os direitos relativos ao código, marca e design pertencem ao respetivo titular.</p>
+
+                <h3 id="t-s7">7. Contacto</h3>
+                <p>Para questões relacionadas com os Termos de Serviço: <strong id="t-contact-email">[EMAIL DE CONTACTO]</strong></p>
+            </div>
+        </div>
+
+        <!-- PRIVACY POLICY PAGE -->
+        <div id="page-privacy" class="page legal-container">
+            <div class="legal-nav">
+                <button onclick="switchPage('terms')" class="btn-secondary" id="sub-t2">Termos de Serviço</button>
+                <button onclick="switchPage('privacy')" class="btn-secondary" style="border-color: var(--gold);" id="sub-p2">Política de Privacidade</button>
+                <button onclick="switchPage('refunds')" class="btn-secondary" id="sub-r2">Política de Reembolsos</button>
+            </div>
+            <div class="legal-box">
+                <h2 id="p-h1">POLÍTICA DE PRIVACIDADE</h2>
+                <span class="update-date" id="p-date">Última atualização: 8 de setembro de 2026</span>
+                
+                <h3 id="p-s1">1. Responsável pelo Tratamento</h3>
+                <ul>
+                    <li><strong id="p-lbl-name">Nome:</strong> [NOME COMPLETO]</li>
+                    <li><strong id="p-lbl-addr">Morada:</strong> [MORADA]</li>
+                    <li><strong id="p-lbl-email">E-mail:</strong> [EMAIL DE CONTACTO]</li>
+                    <li><strong>País:</strong> Portugal</li>
+                </ul>
+
+                <h3 id="p-s2">2. Dados que Recolhemos</h3>
+                <p id="p-p2">Dependendo da utilização do serviço, podemos recolher IDs de utilizador e servidor Discord, identificadores de canais, informações técnicas, logs de utilização, registos de comandos e dados de subscrição.</p>
+
+                <h3 id="p-s3">3. Finalidades do Tratamento</h3>
+                <p id="p-p3">Os dados são utilizados para disponibilizar as funcionalidades do bot, identificar utilizadores, executar comandos, manter logs, diagnosticar erros, prevenir abusos e cumprir obrigações legais.</p>
+
+                <h3 id="p-s4">4. Direitos dos Utilizadores e CNPD</h3>
+                <p id="p-p4">O utilizador tem direito de acesso, retificação, apagamento, limitação, oposição e portabilidade. Em Portugal, a autoridade de controlo competente é a Comissão Nacional de Proteção de Dados (CNPD).</p>
+
+                <h3 id="p-s5">5. Contacto</h3>
+                <p>Para questões de privacidade: <strong id="p-contact-email">[EMAIL DE CONTACTO]</strong></p>
+            </div>
+        </div>
+
+        <!-- REFUND POLICY PAGE -->
+        <div id="page-refunds" class="page legal-container">
+            <div class="legal-nav">
+                <button onclick="switchPage('terms')" class="btn-secondary" id="sub-t3">Termos de Serviço</button>
+                <button onclick="switchPage('privacy')" class="btn-secondary" id="sub-p3">Política de Privacidade</button>
+                <button onclick="switchPage('refunds')" class="btn-secondary" style="border-color: var(--gold);" id="sub-r3">Política de Reembolsos</button>
+            </div>
+            <div class="legal-box">
+                <h2 id="r-h1">POLÍTICA DE REEMBOLSOS</h2>
+                <span class="update-date" id="r-date">Última atualização: 8 de setembro de 2026</span>
+                
+                <h3 id="r-s1">1. Subscrições Mensais</h3>
+                <p id="r-p1">O Zeus Bot funciona através de subscrições mensais que dão acesso ao serviço durante o período contratado.</p>
+
+                <h3 id="r-s2">2. Política Geral</h3>
+                <p id="r-p2">Não oferecemos reembolsos voluntários por períodos de subscrição já iniciados, alteração de opinião, não utilização do bot ou remoção voluntária do servidor.</p>
+
+                <h3 id="r-s3">3. Direitos Legais e Livre Resolução</h3>
+                <p id="r-p3">A presente política não elimina nem limita quaisquer direitos de reembolso ou resolução obrigatórios por lei (como o direito de livre resolução na legislação portuguesa quando aplicável).</p>
+
+                <h3 id="r-s4">4. Falhas e Contacto</h3>
+                <p id="r-p4">Em caso de falha significativa e comprovada imputável ao prestador ou cobranças indevidas, o utilizador deverá contactar-nos através do e-mail abaixo.</p>
+                <p>E-mail: <strong id="r-contact-email">[EMAIL DE CONTACTO]</strong></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p id="footer-text">&copy; 2026 <span>Zeus Bot</span>. Todos os direitos reservados. Não afiliado à EA Sports ou à Discord Inc.</p>
+    </footer>
+
+    <script>
+        function switchPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + pageId).classList.add('active');
+            
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            if(document.getElementById('nav-' + pageId)) {
+                document.getElementById('nav-' + pageId).classList.add('active');
+            }
+            window.scrollTo(0, 0);
+        }
+
+        const translations = {
+            pt: {
+                navHome: "Início",
+                navFeatures: "Funcionalidades",
+                navTerms: "Termos de Serviço",
+                navPrivacy: "Privacidade",
+                navRefunds: "Reembolsos",
+                invite: "Adicionar ao Discord",
+                badgeHero: "⚡ Poder Absoluto para Equipas Profissionais de EA Sports FC 26 & FC27",
+                heroTitle: "Eleva a tua equipa de Esports ao pináculo com o <span>Zeus Bot</span>",
+                heroSubtitle: "Gestão mitológica de estatísticas por OCR, agendamento automatizado de treinos, sincronização divina de cargos e relatórios de partidas para o teu clube de Pro Clubs e Ultimate Team.",
+                btnExplore: "Ver Funcionalidades",
+                feat1Title: "Leitura OCR de Partidas",
+                feat1Desc: "Extração automática de estatísticas, golos e pontuações individuais através de capturas de ecrã do FC26 e FC27 com precisão divina.",
+                feat2Title: "Gestão de Treinos",
+                feat2Desc: "Agendamento automatizado de sessões de treino, convocatórias estratégicas e controlo total de presenças do plantel.",
+                feat3Title: "Base de Dados Segura",
+                feat3Desc: "Registo histórico lendário de desempenho de jogadores e configurações personalizadas por servidor hospedadas em MySQL.",
+                featPageTitle: "Arsenal Tecnológico para o teu Clube",
+                featPageSubtitle: "Forjado especificamente para responder às exigências máximas de managers e atletas de esports profissionais.",
+                f1T: "Sincronização de Nicknames",
+                f1D: "Mantém o império organizado com atribuição automática de cargos e padronização absoluta de nicks no Discord baseada no plantel ativo.",
+                f2T: "Rankings e Estatísticas",
+                f2D: "Gera tabelas lendárias de melhores marcadores, assistências, pontuações médias e relatórios táticos detalhados após cada jornada oficial.",
+                f3T: "Pronto para FC27",
+                f3D: "Atualizações contínuas e divinas para dominar as novas mecânicas, interfaces e formatos de competições oficiais do EA Sports FC.",
+                footer: "&copy; 2026 <span>Zeus Bot</span>. Todos os direitos reservados. Não afiliado à EA Sports ou à Discord Inc.",
+                
+                // Terms PT
+                tH1: "TERMOS DE SERVIÇO", tDate: "Última atualização: 8 de setembro de 2026",
+                tS1: "1. Identificação", tLblName: "Nome:", tLblAddr: "Morada:", tLblEmail: "E-mail:", tLblBot: "Nome do bot/serviço:", tPOp: "O serviço é operado a partir de Portugal.",
+                tS2: "2. Aceitação dos Termos", tP2: "Ao adquirir, utilizar ou aceder ao Zeus Bot, o utilizador declara que leu, compreendeu e aceita os presentes Termos de Serviço. Caso não concorde com estes termos, não deverá adquirir ou utilizar o serviço.",
+                tS3: "3. Descrição do Serviço", tP3: "O Zeus Bot é um bot destinado à plataforma Discord, disponibilizado mediante uma subscrição mensal para gestão de equipas de EA Sports FC.",
+                tLi1: "Comandos automatizados e leitura OCR;", tLi2: "Ferramentas de administração, moderação e treinos;", tLi3: "Sistemas de logs e gestão de servidores.",
+                tS4: "4. Subscrição e Pagamentos", tP4: "O acesso ao serviço é disponibilizado através de uma subscrição mensal cujo preço aplicável será o apresentado no momento da compra. A subscrição poderá renovar-se automaticamente, salvo cancelamento efetuado antes da próxima cobrança.",
+                tS5: "5. Cancelamento e Reembolsos", tP5: "O utilizador pode solicitar o cancelamento da sua subscrição a qualquer momento. Não são efetuados reembolsos voluntários relativamente a períodos de subscrição já iniciados, exceto quando exigido por lei ou acordado pelo prestador.",
+                tS6: "6. Utilização Aceitável e Propriedade Intelectual", tP6: "É estritamente proibido utilizar o bot para atividades ilegais, spam ou violação das regras da Discord. Todos os direitos relativos ao código, marca e design pertencem ao respetivo titular.",
+                tS7: "7. Contacto",
+
+                // Privacy PT
+                pH1: "POLÍTICA DE PRIVACIDADE", pDate: "Última atualização: 8 de setembro de 2026",
+                pS1: "1. Responsável pelo Tratamento", pLblName: "Nome:", pLblAddr: "Morada:", pLblEmail: "E-mail:",
+                pS2: "2. Dados que Recolhemos", pP2: "Dependendo da utilização do serviço, podemos recolher IDs de utilizador e servidor Discord, identificadores de canais, informações técnicas, logs de utilização, registos de comandos e dados de subscrição.",
+                pS3: "3. Finalidades do Tratamento", pP3: "Os dados são utilizados para disponibilizar as funcionalidades do bot, identificar utilizadores, executar comandos, manter logs, diagnosticar erros, prevenir abusos e cumprir obrigações legais.",
+                pS4: "4. Direitos dos Utilizadores e CNPD", pP4: "O utilizador tem direito de acesso, retificação, apagamento, limitação, oposição e portabilidade. Em Portugal, a autoridade de controlo competente é a Comissão Nacional de Proteção de Dados (CNPD).",
+                pS5: "5. Contacto",
+
+                // Refunds PT
+                rH1: "POLÍTICA DE REEMBOLSOS", rDate: "Última atualização: 8 de setembro de 2026",
+                rS1: "1. Subscrições Mensais", rP1: "O Zeus Bot funciona através de subscrições mensais que dão acesso ao serviço durante o período contratado.",
+                rS2: "2. Política Geral", rP2: "Não oferecemos reembolsos voluntários por períodos de subscrição já iniciados, alteração de opinião, não utilização do bot ou remoção voluntária do servidor.",
+                rS3: "3. Direitos Legais e Livre Resolução", rP3: "A presente política não elimina nem limita quaisquer direitos de reembolso ou resolução obrigatórios por lei (como o direito de livre resolução na legislação portuguesa quando aplicável).",
+                rS4: "4. Falhas e Contacto", rP4: "Em caso de falha significativa e comprovada imputável ao prestador ou cobranças indevidas, o utilizador deverá contactar-nos através do e-mail abaixo."
+            },
+            en: {
+                navHome: "Home",
+                navFeatures: "Features",
+                navTerms: "Terms of Service",
+                navPrivacy: "Privacy",
+                navRefunds: "Refunds",
+                invite: "Add to Discord",
+                badgeHero: "⚡ Absolute Power for Professional EA Sports FC 26 & FC27 Teams",
+                heroTitle: "Elevate your Esports team to the pinnacle with <span>Zeus Bot</span>",
+                heroSubtitle: "Mythological OCR stats management, automated training schedules, divine role synchronization, and match reporting for your Pro Clubs and Ultimate Team club.",
+                btnExplore: "Explore Features",
+                feat1Title: "Match OCR Parsing",
+                feat1Desc: "Automatic extraction of player stats, goals, and individual ratings directly from FC26 & FC27 screenshots with divine precision.",
+                feat2Title: "Training Management",
+                feat2Desc: "Automated scheduling of training sessions, strategic squad call-ups, and complete attendance tracking for your roster.",
+                feat3Title: "Secure Database",
+                feat3Desc: "Legendary historical performance tracking for players and custom multi-server settings hosted on MySQL.",
+                featPageTitle: "Technological Arsenal for Your Club",
+                featPageSubtitle: "Forged specifically to meet the rigorous demands of professional esports managers and athletes.",
+                f1T: "Nickname & Role Sync",
+                f1D: "Keep the empire organized with automatic role assignment and absolute nickname standardization on Discord based on the active roster.",
+                f2T: "Rankings & Statistics",
+                f2D: "Generate legendary top scorer tables, assists leaderboards, average ratings, and detailed match reports after every official matchday.",
+                f3T: "Ready for FC27",
+                f3D: "Continuous and divine updates to master new mechanics, interfaces, and official EA Sports FC tournament formats.",
+                footer: "&copy; 2026 <span>Zeus Bot</span>. All rights reserved. Not affiliated with EA Sports or Discord Inc.",
+
+                // Terms EN
+                tH1: "TERMS OF SERVICE", tDate: "Last update: September 8, 2026",
+                tS1: "1. Identification", tLblName: "Name:", tLblAddr: "Address:", tLblEmail: "E-mail:", tLblBot: "Bot/service name:", tPOp: "The service is operated from Portugal.",
+                tS2: "2. Acceptance of Terms", tP2: "By purchasing, using, or accessing Zeus Bot, the user declares that they have read, understood, and accept these Terms of Service. If you disagree, do not use the service.",
+                tS3: "3. Service Description", tP3: "Zeus Bot is a Discord bot provided via monthly subscription for EA Sports FC team management.",
+                tLi1: "Automated commands and OCR reading;", tLi2: "Administration, moderation, and training tools;", tLi3: "Log systems and server management.",
+                tS4: "4. Subscription & Payments", tP4: "Access is granted via monthly subscription at the price presented at purchase. Subscriptions renew automatically unless canceled prior to the next billing cycle.",
+                tS5: "5. Cancellation & Refunds", tP5: "Users may request cancellation at any time. Voluntary refunds are not offered for subscription periods already started, except as required by law.",
+                tS6: "6. Acceptable Use & Intellectual Property", tP6: "Using the bot for illegal activities, spam, or violating Discord rules is strictly prohibited. All code, brand, and design rights belong to their respective owner.",
+                tS7: "7. Contact",
+
+                // Privacy EN
+                pH1: "PRIVACY POLICY", pDate: "Last update: September 8, 2026",
+                pS1: "1. Data Controller", pLblName: "Name:", pLblAddr: "Address:", pLblEmail: "E-mail:",
+                pS2: "2. Data We Collect", pP2: "Depending on usage, we may collect Discord user and server IDs, channel identifiers, technical info, usage logs, command records, and subscription data.",
+                pS3: "3. Purpose of Processing", pP3: "Data is used to provide bot features, identify users, run commands, maintain logs, diagnose errors, prevent abuse, and comply with legal obligations.",
+                pS4: "4. User Rights & CNPD", pP4: "Users have the right of access, rectification, erasure, restriction, objection, and portability. In Portugal, the competent supervisory authority is the National Data Protection Commission (CNPD).",
+                pS5: "5. Contact",
+
+                // Refunds EN
+                rH1: "REFUND POLICY", rDate: "Last update: September 8, 2026",
+                rS1: "1. Monthly Subscriptions", rP1: "Zeus Bot operates via monthly subscriptions providing access during the contracted period.",
+                rS2: "2. General Policy", rP2: "We do not offer voluntary refunds for started subscription periods, change of mind, non-use of the bot, or voluntary removal from the server.",
+                rS3: "3. Legal Rights & Withdrawal", rP3: "This policy does not eliminate or limit any statutory refund or resolution rights required by law.",
+                rS4: "4. Failures & Contact", rP4: "In case of significant proven failures attributable to the provider or improper charges, please contact us via the email below."
+            }
+        };
+
+        function setLanguage(lang) {
+            document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+            const t = translations[lang];
+            document.getElementById('nav-home').innerText = t.navHome;
+            document.getElementById('nav-features').innerText = t.navFeatures;
+            document.getElementById('nav-terms').innerText = t.navTerms;
+            document.getElementById('nav-privacy').innerText = t.navPrivacy;
+            document.getElementById('nav-refunds').innerText = t.navRefunds;
+            document.getElementById('txt-invite').innerText = t.invite;
+            document.getElementById('txt-invite-hero').innerText = t.invite;
+            document.getElementById('badge-hero').innerText = t.badgeHero;
+            document.getElementById('hero-title').innerHTML = t.heroTitle;
+            document.getElementById('hero-subtitle').innerText = t.heroSubtitle;
+            document.getElementById('btn-explore').innerText = t.btnExplore;
+            
+            document.getElementById('feat1-title').innerText = t.feat1Title;
+            document.getElementById('feat1-desc').innerText = t.feat1Desc;
+            document.getElementById('feat2-title').innerText = t.feat2Title;
+            document.getElementById('feat2-desc').innerText = t.feat2Desc;
+            document.getElementById('feat3-title').innerText = t.feat3Title;
+            document.getElementById('feat3-desc').innerText = t.feat3Desc;
+
+            document.getElementById('feat-page-title').innerText = t.featPageTitle;
+            document.getElementById('feat-page-subtitle').innerText = t.featPageSubtitle;
+            document.getElementById('f1-t').innerText = t.f1T;
+            document.getElementById('f1-d').innerText = t.f1D;
+            document.getElementById('f2-t').innerText = t.f2T;
+            document.getElementById('f2-d').innerText = t.f2D;
+            document.getElementById('f3-t').innerText = t.f3T;
+            document.getElementById('f3-d').innerText = t.f3D;
+            document.getElementById('footer-text').innerHTML = t.footer;
+
+            // Terms
+            document.getElementById('t-h1').innerText = t.tH1; document.getElementById('t-date').innerText = t.tDate;
+            document.getElementById('t-s1').innerText = t.tS1; document.getElementById('t-lbl-name').innerText = t.tLblName;
+            document.getElementById('t-lbl-addr').innerText = t.tLblAddr; document.getElementById('t-lbl-email').innerText = t.tLblEmail;
+            document.getElementById('t-lbl-bot').innerText = t.tLblBot; document.getElementById('t-p-op').innerText = t.tPOp;
+            document.getElementById('t-s2').innerText = t.tS2; document.getElementById('t-p2').innerText = t.tP2;
+            document.getElementById('t-s3').innerText = t.tS3; document.getElementById('t-p3').innerText = t.tP3;
+            document.getElementById('t-li1').innerText = t.tLi1; document.getElementById('t-li2').innerText = t.tLi2; document.getElementById('t-li3').innerText = t.tLi3;
+            document.getElementById('t-s4').innerText = t.tS4; document.getElementById('t-p4').innerText = t.tP4;
+            document.getElementById('t-s5').innerText = t.tS5; document.getElementById('t-p5').innerText = t.tP5;
+            document.getElementById('t-s6').innerText = t.tS6; document.getElementById('t-p6').innerText = t.tP6;
+            document.getElementById('t-s7').innerText = t.tS7;
+
+            // Privacy
+            document.getElementById('p-h1').innerText = t.pH1; document.getElementById('p-date').innerText = t.pDate;
+            document.getElementById('p-s1').innerText = t.pS1; document.getElementById('p-lbl-name').innerText = t.pLblName;
+            document.getElementById('p-lbl-addr').innerText = t.pLblAddr; document.getElementById('p-lbl-email').innerText = t.pLblEmail;
+            document.getElementById('p-s2').innerText = t.pS2; document.getElementById('p-p2').innerText = t.pP2;
+            document.getElementById('p-s3').innerText = t.pS3; document.getElementById('p-p3').innerText = t.pP3;
+            document.getElementById('p-s4').innerText = t.pS4; document.getElementById('p-p4').innerText = t.pP4;
+            document.getElementById('p-s5').innerText = t.pS5;
+
+            // Refunds
+            document.getElementById('r-h1').innerText = t.rH1; document.getElementById('r-date').innerText = t.rDate;
+            document.getElementById('r-s1').innerText = t.rS1; document.getElementById('r-p1').innerText = t.rP1;
+            document.getElementById('r-s2').innerText = t.rS2; document.getElementById('r-p2').innerText = t.rP2;
+            document.getElementById('r-s3').innerText = t.rS3; document.getElementById('r-p3').innerText = t.rP3;
+            document.getElementById('r-s4').innerText = t.rS4; document.getElementById('r-p4').innerText = t.rP4;
+            
+            document.getElementById('sub-t').innerText = t.navTerms;
+            document.getElementById('sub-p').innerText = t.navPrivacy;
+            document.getElementById('sub-r').innerText = t.navRefunds;
+            document.getElementById('sub-t2').innerText = t.navTerms;
+            document.getElementById('sub-p2').innerText = t.navPrivacy;
+            document.getElementById('sub-r2').innerText = t.navRefunds;
+            document.getElementById('sub-t3').innerText = t.navTerms;
+            document.getElementById('sub-p3').innerText = t.navPrivacy;
+            document.getElementById('sub-r3').innerText = t.navRefunds;
+        }
+    </script>
+</body>
+</html>
