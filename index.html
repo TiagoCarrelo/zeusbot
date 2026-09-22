@@ -48,7 +48,7 @@
         .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 750px; margin: 0 auto 35px auto; }
         .hero-buttons { display: flex; gap: 20px; justify-content: center; align-items: center; }
         
-        .btn-secondary { background: var(--bg-card); color: #fff; border: 1px solid var(--border); padding: 12px 28px; border-radius: 10px; font-weight: 600; text-decoration: none; transition: 0.2s; cursor: pointer; }
+        .btn-secondary { background: var(--bg-card); color: #fff; border: 1px solid var(--border); padding: 12px 28px; border-radius: 10px; font-weight: 600; text-decoration: none; transition: 0.2s; cursor: pointer; display: inline-block; text-align: center; }
         .btn-secondary:hover { background: var(--bg-card-hover); border-color: var(--gold); }
 
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; margin-top: 50px; }
@@ -70,6 +70,14 @@
         .pricing-features { list-style: none; margin-bottom: 30px; }
         .pricing-features li { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
         .pricing-features li::before { content: '✓'; color: var(--gold); font-weight: bold; }
+
+        /* Commands Section Styling */
+        .commands-section { margin-top: 60px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; }
+        .commands-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 25px; }
+        .command-category { background: rgba(11, 15, 23, 0.5); border: 1px solid rgba(212, 175, 55, 0.1); border-radius: 12px; padding: 20px; }
+        .command-category h4 { color: var(--gold-light); font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        .command-item { font-size: 0.9rem; margin-bottom: 10px; color: var(--text-muted); }
+        .command-item code { background: #070a10; color: var(--gold); padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 0.85rem; border: 1px solid rgba(212, 175, 55, 0.2); }
 
         /* Legal / Documentation Pages */
         .legal-container { max-width: 900px; margin: 0 auto; }
@@ -156,11 +164,11 @@
             </div>
         </div>
 
-        <!-- FEATURES PAGE -->
+        <!-- FEATURES & COMMANDS PAGE -->
         <div id="page-features" class="page">
             <div style="text-align: center; margin-bottom: 50px;">
-                <h2 id="feat-page-title" style="color: #fff; font-size: 2.5rem; margin-bottom: 15px; font-weight: 800;">Módulos Avançados do Ecossistema</h2>
-                <p id="feat-page-subtitle" style="color: var(--text-muted); font-size: 1.15rem;">Desenvolvido com backend em Python, base de dados MySQL e JSON flexível para máxima performance.</p>
+                <h2 id="feat-page-title" style="color: #fff; font-size: 2.5rem; margin-bottom: 15px; font-weight: 800;">Módulos Avançados & Comandos do Bot</h2>
+                <p id="feat-page-subtitle" style="color: var(--text-muted); font-size: 1.15rem;">Desenvolvido com backend em Python, base de dados MySQL e comandos intuitivos para máxima performance.</p>
             </div>
 
             <div class="grid-3">
@@ -195,6 +203,45 @@
                     <p id="f6-d">Compatibilidade total com as exigências técnicas e competitivas das novas temporadas de EA Sports FC.</p>
                 </div>
             </div>
+
+            <!-- Commands Reference Section -->
+            <div class="commands-section">
+                <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 10px;" id="cmd-section-title">Painel de Comandos Oficiais (Discord)</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px;" id="cmd-section-desc">Lista completa de comandos integrados no Zeus Bot divididos por categorias operacionais:</p>
+                
+                <div class="commands-grid">
+                    <div class="command-category">
+                        <h4 id="cat-sports">⚽ Desporto & Partidas</h4>
+                        <div class="command-item"><code>/agendar_treino</code> — Agenda um treino ou jogo</div>
+                        <div class="command-item"><code>/calendario</code> — Mostra a agenda semanal do clube</div>
+                        <div class="command-item"><code>/escalacao</code> — Gere o alinhamento e táticas</div>
+                        <div class="command-item"><code>/registar_resultado_manual</code> — [Staff] Regista resultado no histórico</div>
+                        <div class="command-item"><code>/importar</code> — [PRO] Importa estatísticas via OCR (Imagem)</div>
+                    </div>
+                    <div class="command-category">
+                        <h4 id="cat-players">👥 Jogadores & Perfil</h4>
+                        <div class="command-item"><code>/registar_jogador</code> — Regista o teu perfil EA FC</div>
+                        <div class="command-item"><code>/perfil</code> — Consulta as tuas estatísticas e notas</div>
+                        <div class="command-item"><code>/elenco</code> — Mostra a lista completa de jogadores</div>
+                        <div class="command-item"><code>/apagar_jogador</code> — [Staff] Remove jogador da base de dados</div>
+                    </div>
+                    <div class="command-category">
+                        <h4 id="cat-events">📊 Eventos & Comunidade</h4>
+                        <div class="command-item"><code>/criar_votacao</code> — [Staff] Cria sondagem interativa</div>
+                        <div class="command-item"><code>/encerrar_votacao</code> — [Staff] Fecha sondagem ativa</div>
+                        <div class="command-item"><code>/criar_evento</code> — [Premium] Lança torneio com inscrições</div>
+                        <div class="command-item"><code>/encerrar_evento</code> — [Premium] Fecha o evento e lista final</div>
+                    </div>
+                    <div class="command-category">
+                        <h4 id="cat-admin">⚙️ Administração & Planos</h4>
+                        <div class="command-item"><code>/configurar_canais</code> — [Staff] Define canais de logs e avisos</div>
+                        <div class="command-item"><code>/mudar_alcunha</code> — [Staff] Altera alcunha de um membro</div>
+                        <div class="command-item"><code>/assinar</code> — Mostra opções para planos Premium/PRO</div>
+                        <div class="command-item"><code>/ver_plano</code> — Mostra a subscrição atual do servidor</div>
+                        <div class="command-item"><code>/zeus</code> — Verifica o estado geral do bot</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- PRICING PAGE -->
@@ -223,8 +270,8 @@
                 <div class="pricing-card featured">
                     <div>
                         <div class="badge" style="margin-bottom: 15px;" id="p2-badge">Mais Popular</div>
-                        <h3 id="p2-name">Plano Premium</h3>
-                        <div class="price">9.99€ <span>/ mês</span></div>
+                        <h3 id="p2-name">ZEUS BOT - PREMIUM</h3>
+                        <div class="price">4,99€ <span>/ mês</span></div>
                         <ul class="pricing-features">
                             <li id="p2-f1">Tudo do Plano Free</li>
                             <li id="p2-f2">Gestão avançada de Eventos e Torneios</li>
@@ -232,14 +279,14 @@
                             <li id="p2-f4">Votações dinâmicas e automações</li>
                         </ul>
                     </div>
-                    <button onclick="alert('Redirecionando para checkout Stripe - Plano Premium.')" class="btn-gold" style="width: 100%; text-align: center; justify-content: center;" id="p2-btn">Assinar Premium</button>
+                    <a href="https://buy.stripe.com/test_eVq7sOb2b5lcdLoaB74gg06" target="_blank" class="btn-gold" style="width: 100%; text-align: center; justify-content: center;" id="p2-btn">Assinar Premium</a>
                 </div>
 
                 <!-- PRO Plan -->
                 <div class="pricing-card">
                     <div>
-                        <h3 id="p3-name">Plano PRO</h3>
-                        <div class="price">19.99€ <span>/ mês</span></div>
+                        <h3 id="p3-name">ZEUS BOT - PRO TEAMS</h3>
+                        <div class="price">9,99€ <span>/ mês</span></div>
                         <ul class="pricing-features">
                             <li id="p3-f1">Tudo dos planos anteriores</li>
                             <li id="p3-f2">Importação automática via OCR (Screenshots)</li>
@@ -247,7 +294,7 @@
                             <li id="p3-f4">Prioridade máxima e suporte dedicado</li>
                         </ul>
                     </div>
-                    <button onclick="alert('Redirecionando para checkout Stripe - Plano PRO.')" class="btn-secondary" style="width: 100%; text-align: center;" id="p3-btn">Assinar PRO</button>
+                    <a href="https://buy.stripe.com/test_8x27sO2vF6pg4aO38F4gg05" target="_blank" class="btn-secondary" style="width: 100%; text-align: center; justify-content: center;" id="p3-btn">Assinar PRO</a>
                 </div>
             </div>
         </div>
@@ -277,7 +324,7 @@
                 <p id="t-p2">Ao adquirir, utilizar ou aceder ao Zeus Bot, o utilizador declara que leu, compreendeu e aceita os presentes Termos de Serviço. Caso não concorde com estes termos, não deverá adquirir ou utilizar o serviço.</p>
 
                 <h3 id="t-s3">3. Descrição do Serviço e Planos</h3>
-                <p id="t-p3">O Zeus Bot é um ecossistema destinado à plataforma Discord, disponibilizado através de planos Free, Premium e PRO para gestão profissional de equipas de EA Sports FC.</p>
+                <p id="t-p3">O Zeus Bot é um ecossistema destinado à plataforma Discord, disponibilizado através de planos Free, Premium (4,99€/mês) e Pro Teams (9,99€/mês) para gestão profissional de equipas de EA Sports FC.</p>
                 <ul>
                     <li id="t-li1">Gestão de plantéis, perfis e táticas;</li>
                     <li id="t-li2">Eventos, votações e automações de treino;</li>
@@ -343,7 +390,7 @@
                 <span class="update-date" id="r-date">Última atualização: 8 de setembro de 2026</span>
                 
                 <h3 id="r-s1">1. Subscrições Mensais (Stripe)</h3>
-                <p id="r-p1">Os planos pagos do Zeus Bot (Premium e PRO) funcionam através de subscrições mensais processadas com segurança via Stripe.</p>
+                <p id="r-p1">Os planos pagos do Zeus Bot (Zeus Bot - Premium a 4,99€/mês e Zeus Bot - Pro Teams a 9,99€/mês) funcionam através de subscrições mensais processadas com segurança via Stripe.</p>
 
                 <h3 id="r-s2">2. Política Geral</h3>
                 <p id="r-p2">Não oferecemos reembolsos voluntários por períodos de subscrição já iniciados, alteração de opinião, não utilização do bot ou remoção voluntária do servidor.</p>
@@ -393,8 +440,8 @@
                 feat2Desc: "Gestão de alinhamentos com formações padrão e táticas personalizadas criadas dinamicamente pelas equipas.",
                 feat3Title: "Importação OCR & Estatísticas",
                 feat3Desc: "Leitura automática de screenshots de fim de partida para histórico público de desempenho individual e do clube.",
-                featPageTitle: "Módulos Avançados do Ecossistema",
-                featPageSubtitle: "Desenvolvido com backend em Python, base de dados MySQL e JSON flexível para máxima performance.",
+                featPageTitle: "Módulos Avançados & Comandos do Bot",
+                featPageSubtitle: "Desenvolvido com backend em Python, base de dados MySQL e comandos intuitivos para máxima performance.",
                 f1T: "Plantel & Sincronização",
                 f1D: "Associa Discord ID, Nome EA, Virtual Pro, Posição e Número da Camisola com formato oficial [Número] Nome EA [Posição].",
                 f2T: "Calendário & Convocatórias",
@@ -408,13 +455,20 @@
                 f6T: "Pronto para FC26 & FC27",
                 f6D: "Compatibilidade total com as exigências técnicas e competitivas das novas temporadas de EA Sports FC.",
                 
+                cmdSectionTitle: "Painel de Comandos Oficiais (Discord)",
+                cmdSectionDesc: "Lista completa de comandos integrados no Zeus Bot divididos por categorias operacionais:",
+                catSports: "⚽ Desporto & Partidas",
+                catPlayers: "👥 Jogadores & Perfil",
+                catEvents: "📊 Eventos & Comunidade",
+                catAdmin: "⚙️ Administração & Planos",
+
                 pricingPageTitle: "Planos e Subscrições",
                 pricingPageSubtitle: "Escolhe o plano ideal para potenciar o desempenho do teu clube profissional.",
                 p1Name: "Plano Free", p1Btn: "Começar Grátis",
                 p1F1: "Gestão base de Plantel e Perfis", p1F2: "Histórico de resultados básico", p1F3: "Alinhamentos e táticas manuais",
-                p2Badge: "Mais Popular", p2Name: "Plano Premium", p2Btn: "Assinar Premium",
+                p2Badge: "Mais Popular", p2Name: "ZEUS BOT - PREMIUM", p2Btn: "Assinar Premium",
                 p2F1: "Tudo do Plano Free", p2F2: "Gestão avançada de Eventos e Torneios", p2F3: "Inscrições via botões interativos", p2F4: "Votações dinâmicas e automações",
-                p3Name: "Plano PRO", p3Btn: "Assinar PRO",
+                p3Name: "ZEUS BOT - PRO TEAMS", p3Btn: "Assinar PRO",
                 p3F1: "Tudo dos planos anteriores", p3F2: "Importação automática via OCR (Screenshots)", p3F3: "Estatísticas avançadas detalhadas", p3F4: "Prioridade máxima e suporte dedicado",
 
                 footer: "&copy; 2026 <span>Zeus Bot</span>. Todos os direitos reservados. Não afiliado à EA Sports ou à Discord Inc.",
@@ -423,7 +477,7 @@
                 tH1: "TERMOS DE SERVIÇO", tDate: "Última atualização: 8 de setembro de 2026",
                 tS1: "1. Identificação", tLblName: "Nome:", tLblAddr: "Morada:", tLblEmail: "E-mail:", tLblBot: "Nome do bot/serviço:", tPOp: "O serviço é operado a partir de Portugal.",
                 tS2: "2. Aceitação dos Termos", tP2: "Ao adquirir, utilizar ou aceder ao Zeus Bot, o utilizador declara que leu, compreendeu e aceita os presentes Termos de Serviço. Caso não concorde com estes termos, não deverá adquirir ou utilizar o serviço.",
-                tS3: "3. Descrição do Serviço e Planos", tP3: "O Zeus Bot é um ecossistema destinado à plataforma Discord, disponibilizado através de planos Free, Premium e PRO para gestão profissional de equipas de EA Sports FC.",
+                tS3: "3. Descrição do Serviço e Planos", tP3: "O Zeus Bot é um ecossistema destinado à plataforma Discord, disponibilizado através de planos Free, Premium (4,99€/mês) e Pro Teams (9,99€/mês) para gestão profissional de equipas de EA Sports FC.",
                 tLi1: "Gestão de plantéis, perfis e táticas;", tLi2: "Eventos, votações e automações de treino;", tLi3: "Importação OCR de estatísticas e painéis de controlo.",
                 tS4: "4. Subscrição e Pagamentos (Stripe)", tP4: "O acesso aos planos pagos é processado de forma segura via Stripe através de subscrições mensais. A subscrição renova-se automaticamente, salvo cancelamento efetuado atempadamente antes da próxima cobrança.",
                 tS5: "5. Cancelamento e Reembolsos", tP5: "O utilizador pode solicitar o cancelamento da sua subscrição a qualquer momento. Não são efetuados reembolsos voluntários relativamente a períodos de subscrição já iniciados, exceto quando exigido por lei.",
@@ -440,7 +494,7 @@
 
                 // Refunds PT
                 rH1: "POLÍTICA DE REEMBOLSOS", rDate: "Última atualização: 8 de setembro de 2026",
-                rS1: "1. Subscrições Mensais (Stripe)", rP1: "Os planos pagos do Zeus Bot (Premium e PRO) funcionam através de subscrições mensais processadas com segurança via Stripe.",
+                rS1: "1. Subscrições Mensais (Stripe)", rP1: "Os planos pagos do Zeus Bot (Zeus Bot - Premium a 4,99€/mês e Zeus Bot - Pro Teams a 9,99€/mês) funcionam através de subscrições mensais processadas com segurança via Stripe.",
                 rS2: "2. Política Geral", rP2: "Não oferecemos reembolsos voluntários por períodos de subscrição já iniciados, alteração de opinião, não utilização do bot ou remoção voluntária do servidor.",
                 rS3: "3. Direitos Legais e Livre Resolução", rP3: "A presente política não elimina nem limita quaisquer direitos de reembolso ou resolução obrigatórios por lei (como o direito de livre resolução na legislação portuguesa quando aplicável).",
                 rS4: "4. Falhas e Contacto", rP4: "Em caso de falha significativa e comprovada imputável ao prestador ou cobranças indevidas, o utilizador deverá contactar-nos através do e-mail abaixo."
@@ -463,8 +517,8 @@
                 feat2Desc: "Alignment management with standard formations and custom tactics created dynamically by teams.",
                 feat3Title: "OCR Import & Statistics",
                 feat3Desc: "Automatic parsing of post-match screenshots for public individual and club performance history.",
-                featPageTitle: "Advanced Ecosystem Modules",
-                featPageSubtitle: "Powered by Python backend, MySQL database, and flexible JSON for maximum performance.",
+                featPageTitle: "Advanced Modules & Bot Commands",
+                featPageSubtitle: "Powered by Python backend, MySQL database, and intuitive commands for maximum performance.",
                 f1T: "Roster & Synchronization",
                 f1D: "Link Discord ID, EA Name, Virtual Pro, Position, and Jersey Number with official format [Number] EA Name [Position].",
                 f2T: "Calendar & Call-ups",
@@ -478,13 +532,20 @@
                 f6T: "Ready for FC26 & FC27",
                 f6D: "Full compatibility with technical and competitive demands of new EA Sports FC seasons.",
                 
+                cmdSectionTitle: "Official Discord Commands Panel",
+                cmdSectionDesc: "Complete list of commands integrated into Zeus Bot divided by operational categories:",
+                catSports: "⚽ Sports & Matches",
+                catPlayers: "👥 Players & Profile",
+                catEvents: "📊 Events & Community",
+                catAdmin: "⚙️ Administration & Plans",
+
                 pricingPageTitle: "Plans & Subscriptions",
                 pricingPageSubtitle: "Choose the ideal plan to boost your professional club's performance.",
                 p1Name: "Free Plan", p1Btn: "Start Free",
                 p1F1: "Basic roster and profile management", p1F2: "Basic match history", p1F3: "Manual alignments and tactics",
-                p2Badge: "Most Popular", p2Name: "Premium Plan", p2Btn: "Subscribe Premium",
+                p2Badge: "Most Popular", p2Name: "ZEUS BOT - PREMIUM", p2Btn: "Subscribe Premium",
                 p2F1: "Everything in Free Plan", p2F2: "Advanced Events and Tournaments management", p2F3: "Sign-ups via interactive buttons", p2F4: "Dynamic voting and automation",
-                p3Name: "PRO Plan", p3Btn: "Subscribe PRO",
+                p3Name: "ZEUS BOT - PRO TEAMS", p3Btn: "Subscribe PRO",
                 p3F1: "Everything in previous plans", p3F2: "Automatic OCR import (Screenshots)", p3F3: "Detailed advanced statistics", p3F4: "Top priority and dedicated support",
 
                 footer: "&copy; 2026 <span>Zeus Bot</span>. All rights reserved. Not affiliated with EA Sports or Discord Inc.",
@@ -493,7 +554,7 @@
                 tH1: "TERMS OF SERVICE", tDate: "Last update: September 8, 2026",
                 tS1: "1. Identification", tLblName: "Name:", tLblAddr: "Address:", tLblEmail: "E-mail:", tLblBot: "Bot/service name:", tPOp: "The service is operated from Portugal.",
                 tS2: "2. Acceptance of Terms", tP2: "By purchasing, using, or accessing Zeus Bot, the user declares that they have read, understood, and accept these Terms of Service. If you disagree, do not use the service.",
-                tS3: "3. Service Description & Plans", tP3: "Zeus Bot is a Discord ecosystem provided through Free, Premium, and PRO plans for professional EA Sports FC team management.",
+                tS3: "3. Service Description & Plans", tP3: "Zeus Bot is a Discord ecosystem provided through Free, Premium (€4.99/mo) and Pro Teams (€9.99/mo) plans for professional EA Sports FC team management.",
                 tLi1: "Roster, profile, and tactics management;", tLi2: "Events, voting, and training automation;", tLi3: "OCR stats import and control panels.",
                 tS4: "4. Subscription & Payments (Stripe)", tP4: "Access to paid plans is securely processed via Stripe through monthly subscriptions. Subscriptions renew automatically unless canceled prior to billing.",
                 tS5: "5. Cancellation & Refunds", tP5: "Users may request cancellation at any time. Voluntary refunds are not offered for subscription periods already started, except as required by law.",
@@ -510,7 +571,7 @@
 
                 // Refunds EN
                 rH1: "REFUND POLICY", rDate: "Last update: September 8, 2026",
-                rS1: "1. Monthly Subscriptions (Stripe)", rP1: "Zeus Bot paid plans (Premium and PRO) operate via monthly subscriptions securely processed through Stripe.",
+                rS1: "1. Monthly Subscriptions (Stripe)", rP1: "Zeus Bot paid plans (Zeus Bot - Premium at €4.99/mo and Zeus Bot - Pro Teams at €9.99/mo) operate via monthly subscriptions securely processed through Stripe.",
                 rS2: "2. General Policy", rP2: "We do not offer voluntary refunds for started subscription periods, change of mind, non-use of the bot, or voluntary removal from the server.",
                 rS3: "3. Legal Rights & Withdrawal", rP3: "This policy does not eliminate or limit any statutory refund or resolution rights required by law.",
                 rS4: "4. Failures & Contact", rP4: "In case of significant proven failures attributable to the provider or improper charges, please contact us via the email below."
@@ -550,6 +611,13 @@
             document.getElementById('f4-t').innerText = t.f4T; document.getElementById('f4-d').innerText = t.f4D;
             document.getElementById('f5-t').innerText = t.f5T; document.getElementById('f5-d').innerText = t.f5D;
             document.getElementById('f6-t').innerText = t.f6T; document.getElementById('f6-d').innerText = t.f6D;
+
+            document.getElementById('cmd-section-title').innerText = t.cmdSectionTitle;
+            document.getElementById('cmd-section-desc').innerText = t.cmdSectionDesc;
+            document.getElementById('cat-sports').innerText = t.catSports;
+            document.getElementById('cat-players').innerText = t.catPlayers;
+            document.getElementById('cat-events').innerText = t.catEvents;
+            document.getElementById('cat-admin').innerText = t.catAdmin;
 
             document.getElementById('pricing-page-title').innerText = t.pricingPageTitle;
             document.getElementById('pricing-page-subtitle').innerText = t.pricingPageSubtitle;
